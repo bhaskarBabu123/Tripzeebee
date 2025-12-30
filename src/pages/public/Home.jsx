@@ -138,7 +138,7 @@ const Home = () => {
                       className="w-full bg-gray-50 border border-gray-200 rounded-md px-2.5 py-2 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500 focus:border-amber-500"
                     />
                   </div>
-                  <div className="flex-1 space-y-1">
+                  {/* <div className="flex-1 space-y-1">
                     <label className="text-xs font-medium text-gray-600 flex items-center gap-1">
                       <Clock className="w-3 h-3 text-amber-500" />
                       Duration
@@ -157,7 +157,7 @@ const Home = () => {
                         </option>
                       ))}
                     </select>
-                  </div>
+                  </div> */}
                 </div>
 
                 <button
