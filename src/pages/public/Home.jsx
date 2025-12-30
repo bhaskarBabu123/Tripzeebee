@@ -14,6 +14,7 @@ import {
   Shield
 } from 'lucide-react';
 import axios from 'axios';
+import HeroSection from './HeroSection';
 
 const Home = () => {
   const [featuredTours, setFeaturedTours] = useState([]);
@@ -56,9 +57,8 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-white text-gray-900">
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-gray-100">
+      {/* <section className="relative overflow-hidden border-b border-gray-100">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20 grid lg:grid-cols-[3fr,2fr] gap-10 items-center">
-          {/* Left content */}
           <div>
             <p className="text-xs uppercase tracking-[0.25em] text-gray-500 mb-3">
               curated indian journeys
@@ -73,7 +73,6 @@ const Home = () => {
               transparent pricing across India&apos;s most loved destinations.
             </p>
 
-            {/* Search card */}
             <div className="bg-white border border-gray-200 rounded-xl p-4 sm:p-5">
               <form
                 onSubmit={handleSearch}
@@ -138,26 +137,7 @@ const Home = () => {
                       className="w-full bg-gray-50 border border-gray-200 rounded-md px-2.5 py-2 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500 focus:border-amber-500"
                     />
                   </div>
-                  {/* <div className="flex-1 space-y-1">
-                    <label className="text-xs font-medium text-gray-600 flex items-center gap-1">
-                      <Clock className="w-3 h-3 text-amber-500" />
-                      Duration
-                    </label>
-                    <select
-                      value={searchData.duration}
-                      onChange={(e) =>
-                        setSearchData({ ...searchData, duration: e.target.value })
-                      }
-                      className="w-full bg-gray-50 border border-gray-200 rounded-md px-2.5 py-2 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500 focus:border-amber-500"
-                    >
-                      <option value="">Any</option>
-                      {durations.map((duration) => (
-                        <option key={duration} value={duration}>
-                          {duration}
-                        </option>
-                      ))}
-                    </select>
-                  </div> */}
+                 
                 </div>
 
                 <button
@@ -181,7 +161,6 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Hero links */}
             <div className="mt-6 flex flex-wrap gap-3">
               <Link
                 to="/tours"
@@ -199,7 +178,6 @@ const Home = () => {
             </div>
           </div>
 
-          {/* Right image column */}
           <div className="hidden lg:block">
             <div className="relative w-full h-[340px] rounded-2xl overflow-hidden bg-gray-100">
               <img
@@ -223,7 +201,9 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
+
+      <HeroSection/>
 
       {/* How to book */}
       <section className="py-12 sm:py-16 bg-gray-50">
