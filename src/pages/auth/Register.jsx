@@ -103,7 +103,7 @@ const Register = () => {
     const result = await register(submitData);
     
     if (result.success) {
-      navigate('/user');
+      navigate('/');
     } else {
       setErrors({ submit: result.message });
     }

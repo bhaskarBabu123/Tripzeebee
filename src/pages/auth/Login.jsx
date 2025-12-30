@@ -61,7 +61,7 @@ const Login = () => {
     const result = await login(formData);
     
     if (result.success) {
-      navigate(from, { replace: true });
+      navigate('/');
     } else {
       setErrors({ submit: result.message });
     }
