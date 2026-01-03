@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, Mail, Lock, User, Phone, MapPin, ArrowLeft, Loader2 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import logo from '../../assets/logo.png'
 
 const Register = () => {
   const navigate = useNavigate();
@@ -138,9 +139,9 @@ const Register = () => {
             
             {/* Header */}
             <div className="text-center mb-8">
-              <div className="w-12 h-12 bg-white/80 border border-white/50 rounded-xl flex items-center justify-center mx-auto mb-4 backdrop-blur-sm">
-                <User className="w-5 h-5 text-slate-700" />
-              </div>
+                <div className="flex justify-center">
+                             <img src={logo} alt="" width={150} />
+                           </div>
               <h1 className="text-xl sm:text-2xl text-slate-900 mb-2 font-semibold">Create Account</h1>
               <p className="text-sm text-slate-600">Join Tripzybee to start booking your trips</p>
             </div>
@@ -169,7 +170,7 @@ const Register = () => {
                       type="text"
                       value={formData.name}
                       onChange={handleChange}
-                      className={`w-full pl-10 pr-4 py-3 border-2 rounded-lg text-sm bg-white/80 backdrop-blur-sm transition-all focus:ring-2 focus:ring-slate-200 focus:border-slate-400 ${
+                      className={`w-full pl-10 pr-4 py-3 border border-1 rounded-lg text-sm bg-white/80 backdrop-blur-sm transition-all focus:ring-2 focus:ring-slate-200 focus:border-slate-400 ${
                         errors.name 
                           ? 'border-rose-400 bg-rose-50/80' 
                           : 'border-slate-300/50 hover:border-slate-400/80'
@@ -192,7 +193,7 @@ const Register = () => {
                       type="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className={`w-full pl-10 pr-4 py-3 border-2 rounded-lg text-sm bg-white/80 backdrop-blur-sm transition-all focus:ring-2 focus:ring-slate-200 focus:border-slate-400 ${
+                      className={`w-full pl-10 pr-4 py-3 border border-1 rounded-lg text-sm bg-white/80 backdrop-blur-sm transition-all focus:ring-2 focus:ring-slate-200 focus:border-slate-400 ${
                         errors.email 
                           ? 'border-rose-400 bg-rose-50/80' 
                           : 'border-slate-300/50 hover:border-slate-400/80'
@@ -218,7 +219,7 @@ const Register = () => {
                       type="tel"
                       value={formData.phone}
                       onChange={handleChange}
-                      className={`w-full pl-10 pr-4 py-3 border-2 rounded-lg text-sm bg-white/80 backdrop-blur-sm transition-all focus:ring-2 focus:ring-slate-200 focus:border-slate-400 ${
+                      className={`w-full pl-10 pr-4 py-3 border border-1 rounded-lg text-sm bg-white/80 backdrop-blur-sm transition-all focus:ring-2 focus:ring-slate-200 focus:border-slate-400 ${
                         errors.phone 
                           ? 'border-rose-400 bg-rose-50/80' 
                           : 'border-slate-300/50 hover:border-slate-400/80'
@@ -239,7 +240,7 @@ const Register = () => {
                     type="date"
                     value={formData.dateOfBirth}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-slate-300/50 rounded-lg text-sm bg-white/80 backdrop-blur-sm focus:ring-2 focus:ring-slate-200 focus:border-slate-400 transition-all"
+                    className="w-full px-4 py-3 border border-1 border-slate-300/50 rounded-lg text-sm bg-white/80 backdrop-blur-sm focus:ring-2 focus:ring-slate-200 focus:border-slate-400 transition-all"
                   />
                 </div>
               </div>
@@ -258,7 +259,7 @@ const Register = () => {
                       type={showPassword ? 'text' : 'password'}
                       value={formData.password}
                       onChange={handleChange}
-                      className={`w-full pl-10 pr-10 py-3 border-2 rounded-lg text-sm bg-white/80 backdrop-blur-sm transition-all focus:ring-2 focus:ring-slate-200 focus:border-slate-400 ${
+                      className={`w-full pl-10 pr-10 py-3 border border-1 rounded-lg text-sm bg-white/80 backdrop-blur-sm transition-all focus:ring-2 focus:ring-slate-200 focus:border-slate-400 ${
                         errors.password 
                           ? 'border-rose-400 bg-rose-50/80' 
                           : 'border-slate-300/50 hover:border-slate-400/80'
@@ -288,7 +289,7 @@ const Register = () => {
                       type={showConfirmPassword ? 'text' : 'password'}
                       value={formData.confirmPassword}
                       onChange={handleChange}
-                      className={`w-full pl-10 pr-10 py-3 border-2 rounded-lg text-sm bg-white/80 backdrop-blur-sm transition-all focus:ring-2 focus:ring-slate-200 focus:border-slate-400 ${
+                      className={`w-full pl-10 pr-10 py-3 border border-1 rounded-lg text-sm bg-white/80 backdrop-blur-sm transition-all focus:ring-2 focus:ring-slate-200 focus:border-slate-400 ${
                         errors.confirmPassword 
                           ? 'border-rose-400 bg-rose-50/80' 
                           : 'border-slate-300/50 hover:border-slate-400/80'
@@ -324,7 +325,7 @@ const Register = () => {
                       type="text"
                       value={formData.address.street}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border-2 border-slate-300/50 rounded-lg text-sm bg-white/80 backdrop-blur-sm focus:ring-2 focus:ring-slate-200 focus:border-slate-400 transition-all"
+                      className="w-full px-4 py-3 border border-1 border-slate-300/50 rounded-lg text-sm bg-white/80 backdrop-blur-sm focus:ring-2 focus:ring-slate-200 focus:border-slate-400 transition-all"
                       placeholder="House number, street name"
                     />
                   </div>
@@ -338,7 +339,7 @@ const Register = () => {
                       type="text"
                       value={formData.address.city}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border-2 border-slate-300/50 rounded-lg text-sm bg-white/80 backdrop-blur-sm focus:ring-2 focus:ring-slate-200 focus:border-slate-400 transition-all"
+                      className="w-full px-4 py-3 border border-1 border-slate-300/50 rounded-lg text-sm bg-white/80 backdrop-blur-sm focus:ring-2 focus:ring-slate-200 focus:border-slate-400 transition-all"
                       placeholder="City name"
                     />
                   </div>
@@ -352,7 +353,7 @@ const Register = () => {
                       type="text"
                       value={formData.address.state}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border-2 border-slate-300/50 rounded-lg text-sm bg-white/80 backdrop-blur-sm focus:ring-2 focus:ring-slate-200 focus:border-slate-400 transition-all"
+                      className="w-full px-4 py-3 border border-1 border-slate-300/50 rounded-lg text-sm bg-white/80 backdrop-blur-sm focus:ring-2 focus:ring-slate-200 focus:border-slate-400 transition-all"
                       placeholder="State name"
                     />
                   </div>
@@ -367,7 +368,7 @@ const Register = () => {
                         type="text"
                         value={formData.address.zipCode}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border-2 border-slate-300/50 rounded-lg text-sm bg-white/80 backdrop-blur-sm focus:ring-2 focus:ring-slate-200 focus:border-slate-400 transition-all"
+                        className="w-full px-4 py-3 border border-1 border-slate-300/50 rounded-lg text-sm bg-white/80 backdrop-blur-sm focus:ring-2 focus:ring-slate-200 focus:border-slate-400 transition-all"
                         placeholder="ZIP"
                       />
                     </div>
@@ -380,7 +381,7 @@ const Register = () => {
                         name="address.country"
                         value={formData.address.country}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border-2 border-slate-300/50 rounded-lg text-sm bg-white/80 backdrop-blur-sm focus:ring-2 focus:ring-slate-200 focus:border-slate-400 transition-all"
+                        className="w-full px-4 py-3 border border-1 border-slate-300/50 rounded-lg text-sm bg-white/80 backdrop-blur-sm focus:ring-2 focus:ring-slate-200 focus:border-slate-400 transition-all"
                       >
                         <option>India</option>
                         <option>USA</option>
@@ -408,7 +409,7 @@ const Register = () => {
                       type="text"
                       value={formData.emergencyContact.name}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border-2 border-slate-300/50 rounded-lg text-sm bg-white/80 backdrop-blur-sm focus:ring-2 focus:ring-slate-200 focus:border-slate-400 transition-all"
+                      className="w-full px-4 py-3 border border-1 border-slate-300/50 rounded-lg text-sm bg-white/80 backdrop-blur-sm focus:ring-2 focus:ring-slate-200 focus:border-slate-400 transition-all"
                       placeholder="Contact name"
                     />
                   </div>
@@ -422,7 +423,7 @@ const Register = () => {
                       type="tel"
                       value={formData.emergencyContact.phone}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border-2 border-slate-300/50 rounded-lg text-sm bg-white/80 backdrop-blur-sm focus:ring-2 focus:ring-slate-200 focus:border-slate-400 transition-all"
+                      className="w-full px-4 py-3 border border-1 border-slate-300/50 rounded-lg text-sm bg-white/80 backdrop-blur-sm focus:ring-2 focus:ring-slate-200 focus:border-slate-400 transition-all"
                       placeholder="+91 9876543210"
                     />
                   </div>
@@ -435,7 +436,7 @@ const Register = () => {
                       name="emergencyContact.relationship"
                       value={formData.emergencyContact.relationship}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border-2 border-slate-300/50 rounded-lg text-sm bg-white/80 backdrop-blur-sm focus:ring-2 focus:ring-slate-200 focus:border-slate-400 transition-all"
+                      className="w-full px-4 py-3 border border-1 border-slate-300/50 rounded-lg text-sm bg-white/80 backdrop-blur-sm focus:ring-2 focus:ring-slate-200 focus:border-slate-400 transition-all"
                     >
                       <option value="">Select</option>
                       <option>Parent</option>

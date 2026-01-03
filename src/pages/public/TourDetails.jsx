@@ -8,6 +8,7 @@ import {
 import axios from 'axios';
 import { useAuth } from '../../context/AuthContext';
 import { useCart } from '../../context/CartContext';
+import ItineraryAccordion from './ItineraryAccordion';
 
 const TourDetails = () => {
   const { id } = useParams();
@@ -124,7 +125,7 @@ const TourDetails = () => {
                 </div>
               </div>
 
-              <div className="p-6">
+              {/* <div className="p-6">
                 <h3 className="text-xs font-bold uppercase text-slate-400 mb-5 tracking-widest">Journey Itinerary</h3>
                 <div className="space-y-6">
                   {tour.itinerary.map((step, i) => (
@@ -144,7 +145,9 @@ const TourDetails = () => {
                     </div>
                   ))}
                 </div>
-              </div>
+              </div> */}
+
+              <ItineraryAccordion tour={tour}/>
 
               <div className="p-6 grid md:grid-cols-2 gap-8 bg-slate-50/30">
                 <div>

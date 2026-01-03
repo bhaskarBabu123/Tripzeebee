@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Eye, EyeOff, Mail, Lock, ArrowLeft, Loader2 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import logo from '../../assets/logo.png'
+
 
 const Login = () => {
   const navigate = useNavigate();
@@ -96,8 +98,8 @@ const Login = () => {
             
             {/* Header */}
             <div className="text-center mb-8">
-              <div className="w-12 h-12 bg-white/80 border border-white/50 rounded-xl flex items-center justify-center mx-auto mb-4 backdrop-blur-sm">
-                <Mail className="w-5 h-5 text-slate-700" />
+              <div className="flex justify-center">
+                <img src={logo} alt="" width={150} />
               </div>
               <h1 className="text-2xl text-slate-900 mb-2 font-semibold">Sign In</h1>
               <p className="text-sm text-slate-600">Enter your details to access your account</p>
@@ -126,7 +128,7 @@ const Login = () => {
                     type="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className={`w-full pl-10 pr-4 py-3 border-2 rounded-lg text-sm bg-white/80 backdrop-blur-sm transition-all duration-200 focus:ring-2 focus:ring-slate-200 focus:border-slate-400 ${
+                    className={`w-full pl-10 pr-4 py-3 border border-1 rounded-lg text-sm bg-white/80 backdrop-blur-sm transition-all duration-200 focus:ring-2 focus:ring-slate-200 focus:border-slate-400 ${
                       errors.email 
                         ? 'border-rose-400 bg-rose-50/80' 
                         : 'border-slate-300/50 hover:border-slate-400/80'
@@ -152,7 +154,7 @@ const Login = () => {
                     type={showPassword ? 'text' : 'password'}
                     value={formData.password}
                     onChange={handleChange}
-                    className={`w-full pl-10 pr-10 py-3 border-2 rounded-lg text-sm bg-white/80 backdrop-blur-sm transition-all duration-200 focus:ring-2 focus:ring-slate-200 focus:border-slate-400 ${
+                    className={`w-full pl-10 pr-10 py-3 border border-1 rounded-lg text-sm bg-white/80 backdrop-blur-sm transition-all duration-200 focus:ring-2 focus:ring-slate-200 focus:border-slate-400 ${
                       errors.password 
                         ? 'border-rose-400 bg-rose-50/80' 
                         : 'border-slate-300/50 hover:border-slate-400/80'

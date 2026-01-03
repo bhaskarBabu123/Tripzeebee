@@ -54,7 +54,7 @@ const HeroSection = () => {
                   Experience the subcontinent through the eyes of locals. We eliminate the middleman to bring you direct, conscious, and authentic journeys.
                 </p>
                 <Link to="/about" className="flex items-center gap-4 pl-6 group cursor-pointer">
-                  <span className="text-[10px] font-black uppercase tracking-widest group-hover:text-yellow-400 transition-colors">About Us</span>
+                  <span className="text-[10px] font-black uppercase tracking-widest group-hover:text-yellow-400 transition-colors">About Uws</span>
                   <MoveRight className="text-yellow-400 group-hover:translate-x-2 transition-transform" />
                 </Link>
               </div>

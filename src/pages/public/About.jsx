@@ -5,7 +5,7 @@ import {
   ArrowRight, CheckCircle, Globe, Target, Rocket
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
+import aboutImage from '../../assets/about.png'
 const About = () => {
   return (
     <div className="min-h-screen bg-white text-gray-900">
@@ -14,7 +14,7 @@ const About = () => {
       <section className="bg-gray-900 py-10 lg:py-14 relative overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <img 
-            src="https://images.pexels.com/photos/2104114/pexels-photo-2104114.jpeg" 
+            src={aboutImage}
             className="w-full h-full object-cover" 
             alt="Banner background" 
           />

@@ -4,7 +4,7 @@ import {
   Globe, ShieldCheck, Zap, Headphones, ArrowRight,
   ExternalLink, Instagram, Facebook, Twitter
 } from 'lucide-react';
-
+import contactImage from '../../assets/contact.png'
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '', email: '', phone: '', subject: '', message: '', preferredTrip: ''
@@ -33,7 +33,7 @@ const Contact = () => {
       <section className="bg-gray-900 py-10 lg:py-14 relative overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <img 
-            src="https://images.pexels.com/photos/1271619/pexels-photo-1271619.jpeg" 
+            src={contactImage} 
             className="w-full h-full object-cover" 
             alt="Contact Banner" 
           />

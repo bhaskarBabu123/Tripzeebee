@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import logo from '../../assets/logo.png'
 import { 
   Plane, 
   Mail, 
@@ -21,12 +22,8 @@ const PublicFooter = () => {
           {/* Company */}
           <div>
             <Link to="/" className="inline-flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 bg-amber-500 rounded-lg flex items-center justify-center">
-                <Plane className="w-4 h-4 text-black" />
-              </div>
-              <div>
-                <span className="text-lg font-semibold block leading-tight">Tripzy</span>
-                <span className="text-amber-400 text-sm font-medium">bee</span>
+              <div className="bg-white rounded-md">
+                 <img src={logo} width={150} alt="" />
               </div>
             </Link>
             <p className="text-xs text-gray-400 mb-4 leading-relaxed max-w-xs">
@@ -121,19 +118,9 @@ const PublicFooter = () => {
 
         {/* Bottom bar */}
         <div className="border-t border-gray-800 pt-6 pb-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
-            <p>© 2025 Tripzybee. All rights reserved.</p>
-            <div className="flex flex-wrap gap-4">
-              <Link to="/privacy" className="hover:text-amber-400 transition-colors">
-                Privacy
-              </Link>
-              <Link to="/terms" className="hover:text-amber-400 transition-colors">
-                Terms
-              </Link>
-              <Link to="/refund" className="hover:text-amber-400 transition-colors">
-                Refunds
-              </Link>
-            </div>
+          <div className="flex flex-col md:flex-row justify-center items-center gap-4 text-xs text-gray-500">
+            <p>© {new Date().getFullYear()} Tripzybee. All rights reserved.</p>
+            
           </div>
         </div>
       </div>
