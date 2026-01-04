@@ -134,15 +134,18 @@ const Contact = () => {
               <div className="space-y-4">
                 <div>
                   <p className="text-[10px] font-black uppercase opacity-60">Emergency Hotline</p>
-                  <p className="text-sm font-black">+91 98765 43210</p>
+                  <p className="text-sm font-black">+91 90367 51234</p>
                 </div>
                 <div>
                   <p className="text-[10px] font-black uppercase opacity-60">Corporate Queries</p>
-                  <p className="text-sm font-black">biz@tripzybee.com</p>
+                  <p className="text-sm font-black">Tripzybee@gmail.com</p>
                 </div>
                 <div>
-                  <p className="text-[10px] font-black uppercase opacity-60">Office HQ</p>
-                  <p className="text-[11px] font-bold leading-tight">123 Travel St, BKC Business Hub, Bangalore, 400051</p>
+                  <p className="text-[10px] font-black uppercase opacity-60">Address</p>
+                  <p className="text-[11px] font-bold leading-tight"> Lakshmi Tarang Society, 3rd Main Road,<br />
+                  RMV 2nd Stage, KGE Layout, Sanjayanagara,<br />
+                  Bengaluru, Karnataka 560094</p>
+                  
                 </div>
               </div>
             </div>

@@ -305,13 +305,13 @@ const Home = () => {
 
       {/* Buttons: Full width on mobile, auto width on tablet+ */}
       <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4">
-        <button className="w-full sm:w-auto bg-amber-500 text-slate-900 px-8 md:px-12 py-4 md:py-5 rounded-xl md:rounded-2xl font-black uppercase tracking-widest text-[10px] md:text-xs hover:bg-white transition-all shadow-lg shadow-amber-500/10">
+        <Link to="/register" className="w-full sm:w-auto bg-amber-500 text-slate-900 px-8 md:px-12 py-4 md:py-5 rounded-xl md:rounded-2xl font-black uppercase tracking-widest text-[10px] md:text-xs hover:bg-white transition-all shadow-lg shadow-amber-500/10">
           Create Account
-        </button>
+        </Link>
         
-        <button className="w-full sm:w-auto bg-white/5 text-white border border-white/10 backdrop-blur-md px-8 md:px-12 py-4 md:py-5 rounded-xl md:rounded-2xl font-black uppercase tracking-widest text-[10px] md:text-xs hover:bg-white/10 transition-all">
-          Media Kit
-        </button>
+        <Link to="/contact" className="w-full sm:w-auto bg-white/5 text-white border border-white/10 backdrop-blur-md px-8 md:px-12 py-4 md:py-5 rounded-xl md:rounded-2xl font-black uppercase tracking-widest text-[10px] md:text-xs hover:bg-white/10 transition-all">
+          Contact Us
+        </Link>
       </div>
 
       {/* Sub-text: Adjusted spacing for small screens */}

@@ -42,6 +42,9 @@ import AdminTourForm from './pages/admin/AdminTourForm';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminRoute from './components/AdminRoute';
 import ScrollToTop from './components/ScrollToTop';
+import PrivacyPolicy from './pages/public/PrivacyPolicy';
+import TermsAndConditions from './pages/public/TermsAndConditions';
+import Sitemap from './pages/public/Sitemap';
 
 function App() {
   return (
@@ -57,7 +60,10 @@ function App() {
                 <Route path="tours" element={<Tours />} />
                 <Route path="tours/:id" element={<TourDetails />} />
                 <Route path="about" element={<About />} />
+                <Route path="privacy" element={<PrivacyPolicy />} />
+                <Route path="terms" element={<TermsAndConditions />} />
                 <Route path="contact" element={<Contact />} />
+                <Route path="sitemap" element={<Sitemap />} />
                 <Route path="login" element={<Login />} />
                 <Route path="register" element={<Register />} />
               </Route>
