@@ -20,7 +20,7 @@ const About = () => {
           />
         </div>
         <div className="max-w-6xl mx-auto px-4 relative z-10">
-          <p className="text-[10px] uppercase tracking-[0.3em] text-amber-500 font-bold mb-2">Startup Spotlight 2025</p>
+          <p className="text-[10px] uppercase tracking-[0.3em] text-amber-500 font-bold mb-2">Startup Spotlight 2026</p>
           <h1 className="text-3xl lg:text-4xl font-black text-white leading-none">
             WE ARE <span className="text-amber-500 underline decoration-2 underline-offset-4">TRIPZYBEE.</span>
           </h1>

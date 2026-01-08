@@ -45,6 +45,7 @@ import ScrollToTop from './components/ScrollToTop';
 import PrivacyPolicy from './pages/public/PrivacyPolicy';
 import TermsAndConditions from './pages/public/TermsAndConditions';
 import Sitemap from './pages/public/Sitemap';
+import Visa from './pages/public/Visa';
 
 function App() {
   return (
@@ -64,6 +65,7 @@ function App() {
                 <Route path="terms" element={<TermsAndConditions />} />
                 <Route path="contact" element={<Contact />} />
                 <Route path="sitemap" element={<Sitemap />} />
+                <Route path="visa" element={<Visa />} />
                 <Route path="login" element={<Login />} />
                 <Route path="register" element={<Register />} />
               </Route>
@@ -106,3 +108,26 @@ function App() {
 }
 
 export default App;
+
+
+// import React from 'react'
+// import { BrowserRouter, Route, Routes } from 'react-router-dom'
+// import Cart from './Cart'
+
+// function App() {
+//   return (
+//     <div>
+
+//       <BrowserRouter>
+//         <Routes>
+//          <Route path='/Bhaskar' element={<Cart productname="iphone" productimage="https://cdn.thewirecutter.com/wp-content/media/2025/09/BG-IPHONE-2048px_IPHONE-17-PRO-MAX_BACK.jpg?auto=webp&quality=75&width=1024"/>}/>
+
+//         </Routes>
+      
+//       </BrowserRouter>
+      
+//     </div>
+//   )
+// }
+
+// export default App

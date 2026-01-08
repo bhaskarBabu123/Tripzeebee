@@ -65,12 +65,12 @@ const Home = () => {
       <div>
         <div className="flex items-center gap-2 mb-2">
           <div className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
-          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-amber-600">Live Inventory</p>
+          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-amber-600">Upcoming Trips</p>
         </div>
-        <h2 className="text-3xl md:text-5xl font-black tracking-tighter">Prime <span className="text-amber-500">Deployments.</span></h2>
+        <h2 className="text-3xl md:text-5xl font-black tracking-tighter">Our Best Travel  <span className="text-amber-500">Packages</span></h2>
       </div>
       <Link to="/tours" className="hidden md:flex items-center gap-2 text-xs font-black uppercase tracking-widest border-b-2 border-slate-900 pb-1 hover:text-amber-500 hover:border-amber-500 transition-all">
-        Full Catalog <ArrowRight size={14} />
+        Explore Tours <ArrowRight size={14} />
       </Link>
     </div>
 
@@ -213,10 +213,11 @@ const Home = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { name: 'Kashmir Valley', season: 'APR - SEP', img: 'https://images.unsplash.com/photo-1595815771614-ade9d652a65d', icon: <Wind size={20}/> },
-              { name: 'Rajasthan Heritage', season: 'OCT - MAR', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmn2Cd3hFgLHp3mUYh5Tpcc6hf9Z551TmKog&s', icon: <Compass size={20}/> },
-              { name: 'Ladakh High-Pass', season: 'JUN - AUG', img: 'https://sandeepachetan.com/wp-content/uploads/2013/10/IN_LAM201307308553-landform.jpg', icon: <HardHat size={20}/> },
-              { name: 'Kerala Serenity', season: 'SEP - MAR', img: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944', icon: <Globe size={20}/> }
+               { name: 'Rajasthan Heritage', season: 'OCT - MAR', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmn2Cd3hFgLHp3mUYh5Tpcc6hf9Z551TmKog&s', icon: <Compass size={20}/> },
+              { name: 'Kodaikanal', season: 'APR - SEP', img: 'https://images.moneycontrol.com/static-mcnews/2024/10/20241004115114_9-guna-caves.jpg', icon: <Wind size={20}/> },
+             
+              { name: 'Hampi', season: 'JUN - AUG', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHw98E-GTFLuzEXeQC_asNL6fHhu8_pM8Yyg&s', icon: <HardHat size={20}/> },
+              { name: 'Varkala', season: 'SEP - MAR', img: 'https://s3.india.com/wp-content/uploads/2025/06/8-Relaxing-Weekend-Escapes-From-Varkala-For-Peace-Seekers.jpg?impolicy=Medium_Widthonly&w=350&h=263', icon: <Globe size={20}/> }
             ].map((c, i) => (
               <div key={i} className="group relative h-96 rounded-[2.5rem] overflow-hidden bg-slate-100">
                 <img src={c.img} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" alt={c.name} />
@@ -299,8 +300,8 @@ const Home = () => {
     <div className="relative z-10 space-y-6 md:space-y-8">
       {/* Heading: Responsive sizing from text-3xl to text-7xl */}
       <h2 className="text-3xl sm:text-4xl lg:text-7xl font-black text-white tracking-tighter leading-tight md:leading-none">
-        Initiate your <br/>
-        <span className="text-amber-500">Journey Protocol.</span>
+        Initiate <span className="text-amber-500">your</span> <br/>
+        <span className="text-amber-500">Journey <span className="text-white">with</span> Us</span>
       </h2>
 
       {/* Buttons: Full width on mobile, auto width on tablet+ */}
@@ -316,7 +317,7 @@ const Home = () => {
 
       {/* Sub-text: Adjusted spacing for small screens */}
       <p className="text-[8px] md:text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] md:tracking-[0.4em] pt-2">
-        Enterprise Access & Bulk Logistics Available
+        It always seems impossible until it's done 
       </p>
     </div>
   </div>

@@ -16,8 +16,9 @@ const UnifiedHeader = () => {
   // 1. PUBLIC LINKS (Always visible)
   const publicLinks = [
     { name: 'Home', href: '/' },
-    { name: 'Tours', href: '/tours' },
     { name: 'About', href: '/about' },
+    { name: 'Tours', href: '/tours' },
+    { name: 'Visa', href: '/visa' },
     { name: 'Contact', href: '/contact' },
   ];
 

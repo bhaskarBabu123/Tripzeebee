@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../assets/logo.png'
+import logo from '../../assets/l.png'
 import { 
   Mail, 
   Phone, 
@@ -24,7 +24,7 @@ const PublicFooter = () => {
           {/* Company Profile */}
           <div className="lg:col-span-1">
             <Link to="/" className="inline-flex items-center gap-2 mb-6">
-              <div className="bg-white p-1 rounded-md">
+              <div className=" p-1 rounded-md">
                  <img src={logo} width={140} alt="Tripzybee Logo" />
               </div>
             </Link>
