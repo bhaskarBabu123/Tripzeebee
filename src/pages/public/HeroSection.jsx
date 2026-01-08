@@ -23,7 +23,7 @@ const HeroSection = () => {
   }, []);
 
   const mobileVideo =
-    'https://static.vecteezy.com/system/resources/previews/002/751/030/mp4/sunrise-with-mountains-trees-and-clouds-free-video.mp4';
+    'https://static.vecteezy.com/system/resources/previews/009/266/022/mp4/magelang-indonesia-2022-aerial-view-mount-sumbing-kkali-angkrik-nepal-van-java-free-video.mp4';
 
   const desktopVideo = video;
 
