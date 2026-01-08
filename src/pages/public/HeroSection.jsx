@@ -1,38 +1,54 @@
-import React from 'react';
-import { 
-  ArrowRight, 
-  ChevronRight, 
-  Globe, 
+import React, { useEffect, useState } from 'react';
+import {
+  ArrowRight,
+  ChevronRight,
+  Globe,
   MoveRight,
   Minus
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import video from './hero_bg2.mp4'
+import video from './hero_bg2.mp4';
 
 const HeroSection = () => {
+  const [sWidth, setSWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setSWidth(window.innerWidth);
+
+    window.addEventListener('resize', handleResize);
+    // set once in case of SSR hydration/layout changes
+    handleResize();
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const mobileVideo =
+    'https://static.vecteezy.com/system/resources/previews/002/751/030/mp4/sunrise-with-mountains-trees-and-clouds-free-video.mp4';
+
+  const desktopVideo = video;
+
   return (
     <div className="relative min-h-screen w-full bg-[#0a0a0a] text-white overflow-hidden font-sans">
-      
       {/* --- CINEMATIC BACKGROUND (VIDEO) --- */}
       <div className="absolute inset-0 z-0">
         <video
-          className="w-full h-full object-cover opacity-100  hover:grayscale-0 transition-all duration-1000 scale-105"
+          className="w-full h-full object-cover opacity-100 hover:grayscale-0 transition-all duration-1000 scale-105"
           autoPlay
           muted
           loop
           playsInline
         >
-          {/* replace this src with your own mp4 url or imported file */}
-          <source src={video} type="video/mp4" />
+          <source
+            src={sWidth < 568 ? mobileVideo : desktopVideo}
+            type="video/mp4"
+          />
         </video>
 
-        {/* Gradient overlays for professional depth */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-[#0a0a0a]/40" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/20 to-transparent" />
       </div>
 
-      {/* --- MAIN CONTENT AREA --- */}
-      <main className="relative z-10 max-w-[1440px] mx-auto px-8 lg:px-16 pt-10 lg:pt-20">
+     <main className="relative z-10 max-w-[1440px] mx-auto px-8 lg:px-16 pt-10 lg:pt-20">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-12">
           {/* LEFT: MASSIVE TYPOGRAPHY */}
           <div className="max-w-4xl">
@@ -104,15 +120,6 @@ const HeroSection = () => {
           </div>
         </div>
       </main>
-
-      {/* --- DECORATIVE SIDEBAR --- */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 h-1/2 w-20 hidden xl:flex flex-col items-center justify-between py-10 border-l border-white/5">
-        <Globe size={16} className="text-yellow-400/20" />
-        <div className="h-40 w-[1px] bg-gradient-to-b from-transparent via-yellow-400 to-transparent" />
-        <span className="[writing-mode:vertical-lr] text-[9px] font-black uppercase tracking-[0.5em] text-white/20">
-          Scroll
-        </span>
-      </div>
     </div>
   );
 };
