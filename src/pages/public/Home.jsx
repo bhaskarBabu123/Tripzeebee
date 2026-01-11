@@ -11,6 +11,7 @@ import axios from 'axios';
 import HeroSection from './HeroSection';
 import TripzyHeroFooter from './TripzyHeroFooter';
 import FeaturedToursSection from './FeaturedToursSection';
+import ReelExperienceSection from './InstagramExperienceSection';
 
 const Home = () => {
   const [featuredTours, setFeaturedTours] = useState([]);
@@ -131,6 +132,8 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      <ReelExperienceSection/>
 
       {/* --- SECTION 5: OPERATIONAL STACK (Tech Advantage) --- */}
       <section className="py-24 bg-slate-50 border-y border-slate-100">
