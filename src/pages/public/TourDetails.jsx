@@ -44,7 +44,206 @@ const TourDetails = () => {
     setAddingToCart(false);
   };
 
-  if (loading || !tour) return <div className="p-10 text-center text-sm font-medium">Loading details...</div>;
+  // Skeleton Components
+  const SkeletonNav = () => (
+    <nav className="bg-white border-b border-slate-200 sticky top-0 z-50 animate-pulse">
+      <div className="max-w-7xl mx-auto px-4 h-12 flex items-center justify-between">
+        <div className="w-24 h-4 bg-slate-200 rounded" />
+        <div className="flex items-center gap-4">
+          <div className="w-20 h-5 bg-slate-200 rounded" />
+          <div className="flex gap-1.5">
+            <div className="w-6 h-6 bg-slate-200 rounded-lg" />
+            <div className="w-6 h-6 bg-slate-200 rounded-lg" />
+          </div>
+        </div>
+      </div>
+    </nav>
+  );
+
+  const SkeletonGallery = () => (
+    <div className="bg-white p-2 rounded-xl border border-slate-200 shadow-sm animate-pulse">
+      <div className="relative h-[400px] overflow-hidden rounded-lg bg-gradient-to-r from-slate-200 via-slate-100 to-slate-200">
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer" />
+      </div>
+      <div className="flex gap-2.5 mt-2.5 overflow-x-auto pb-1">
+        {[...Array(5)].map((_, i) => (
+          <div key={i} className="shrink-0 w-24 h-16 bg-slate-200 rounded-md overflow-hidden">
+            <div className="w-full h-full bg-gradient-to-r from-slate-200 via-slate-100 to-slate-200 animate-shimmer" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
+  const SkeletonHeader = () => (
+    <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm animate-pulse space-y-4">
+      <div className="h-8 bg-slate-200 rounded w-5/6" />
+      <div className="flex flex-wrap items-center gap-5">
+        <div className="flex items-center gap-2">
+          <div className="w-4 h-4 bg-slate-200 rounded-full" />
+          <div className="h-4 bg-slate-200 rounded w-32" />
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="w-4 h-4 bg-slate-200 rounded-full" />
+          <div className="h-4 bg-slate-200 rounded w-20" />
+        </div>
+        <div className="w-28 h-6 bg-slate-200 rounded-full" />
+      </div>
+    </div>
+  );
+
+  const SkeletonStats = () => (
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      {[...Array(4)].map((_, i) => (
+        <div key={i} className="bg-white p-4 border border-slate-200 rounded-xl flex items-center gap-3 animate-pulse">
+          <div className="w-10 h-10 bg-slate-200 rounded-lg" />
+          <div>
+            <div className="h-3 bg-slate-200 rounded w-16 mb-2" />
+            <div className="h-4 bg-slate-200 rounded w-24" />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+
+  const SkeletonContent = () => (
+    <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm divide-y divide-slate-100 animate-pulse">
+      <div className="p-6">
+        <div className="h-4 bg-slate-200 rounded w-24 mb-4" />
+        <div className="space-y-3">
+          <div className="h-4 bg-slate-200 rounded w-full" />
+          <div className="h-4 bg-slate-200 rounded w-5/6" />
+          <div className="h-4 bg-slate-200 rounded w-3/4" />
+          <div className="flex flex-wrap gap-2 mt-4">
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="h-6 bg-slate-200 rounded-lg w-20" />
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className="p-6 grid md:grid-cols-2 gap-8 bg-slate-50/30">
+        <div>
+          <div className="h-3 bg-slate-200 rounded w-28 mb-4" />
+          <div className="space-y-3">
+            {[...Array(5)].map((_, i) => (
+              <div key={i} className="flex items-center gap-2">
+                <div className="w-4 h-4 bg-slate-200 rounded-full" />
+                <div className="h-3 bg-slate-200 rounded w-40" />
+              </div>
+            ))}
+          </div>
+        </div>
+        <div>
+          <div className="h-3 bg-slate-200 rounded w-32 mb-4" />
+          <div className="space-y-3">
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="flex items-center gap-2">
+                <div className="w-4 h-4 bg-slate-200 rounded-full" />
+                <div className="h-3 bg-slate-200 rounded w-32" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  const SkeletonChecklists = () => (
+    <div className="grid md:grid-cols-2 gap-4">
+      {[...Array(2)].map((_, i) => (
+        <div key={i} className="bg-white border border-slate-200 p-5 rounded-xl shadow-sm animate-pulse">
+          <div className="flex items-center gap-2 mb-4">
+            <div className="w-4 h-4 bg-slate-200 rounded-full" />
+            <div className="h-3 bg-slate-200 rounded w-32" />
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {[...Array(6)].map((_, j) => (
+              <div key={j} className="h-6 bg-slate-200 rounded-md w-20" />
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+
+  const SkeletonSidebar = () => (
+    <div className="lg:col-span-4">
+      <div className="sticky top-20 space-y-4">
+        <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-md shadow-slate-200/40 animate-pulse">
+          <div className="mb-6 pb-6 border-b border-slate-50">
+            <div className="h-3 bg-slate-200 rounded w-24 mb-2" />
+            <div className="flex items-baseline gap-2">
+              <div className="h-10 bg-slate-200 rounded w-32" />
+              <div className="h-5 bg-slate-200 rounded w-20" />
+            </div>
+            <div className="h-5 bg-slate-200 rounded w-28 mt-2" />
+          </div>
+          
+          <div className="space-y-5">
+            <div className="space-y-2">
+              <div className="h-3 bg-slate-200 rounded w-20" />
+              <div className="h-12 bg-slate-200 rounded-lg relative" />
+            </div>
+            
+            <div className="space-y-2">
+              <div className="h-3 bg-slate-200 rounded w-28" />
+              <div className="h-12 bg-slate-200 rounded-lg flex items-center justify-between p-3" />
+            </div>
+            
+            <div className="space-y-4">
+              <div className="flex justify-between items-center">
+                <div className="h-3 bg-slate-200 rounded w-20" />
+                <div className="h-6 bg-slate-200 rounded w-24" />
+              </div>
+              <div className="space-y-2">
+                <div className="h-10 bg-slate-200 rounded-lg" />
+                <div className="h-10 bg-slate-200 rounded-lg" />
+              </div>
+            </div>
+          </div>
+          
+          <div className="mt-6 pt-5 border-t border-slate-50">
+            <div className="flex items-start gap-3">
+              <div className="w-5 h-5 bg-slate-200 rounded-full mt-1" />
+              <div>
+                <div className="h-3 bg-slate-200 rounded w-32" />
+                <div className="h-3 bg-slate-200 rounded w-48 mt-1" />
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div className="bg-slate-900 h-20 rounded-xl flex items-center justify-between p-5 animate-pulse">
+          <div>
+            <div className="h-3 bg-slate-700 rounded w-24" />
+            <div className="h-4 bg-slate-600 rounded w-32 mt-1" />
+          </div>
+          <div className="w-8 h-8 bg-slate-700 rounded-lg" />
+        </div>
+      </div>
+    </div>
+  );
+
+  if (loading || !tour) {
+    return (
+      <div className="min-h-screen bg-slate-50/50 text-slate-700 font-sans">
+        <SkeletonNav />
+        <main className="max-w-7xl mx-auto px-4 py-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            {/* LEFT CONTENT */}
+            <div className="lg:col-span-8 space-y-6">
+              <SkeletonGallery />
+              <SkeletonHeader />
+              <SkeletonStats />
+              <SkeletonContent />
+              <SkeletonChecklists />
+            </div>
+            <SkeletonSidebar />
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-slate-50/50 text-slate-700 font-sans">
@@ -125,28 +324,6 @@ const TourDetails = () => {
                 </div>
               </div>
 
-              {/* <div className="p-6">
-                <h3 className="text-xs font-bold uppercase text-slate-400 mb-5 tracking-widest">Journey Itinerary</h3>
-                <div className="space-y-6">
-                  {tour.itinerary.map((step, i) => (
-                    <div key={i} className="flex gap-5">
-                      <div className="flex flex-col items-center">
-                        <div className="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center text-[11px] font-bold">D{step.day}</div>
-                        <div className="w-px h-full bg-slate-100 my-1"></div>
-                      </div>
-                      <div className="pb-4">
-                        <h4 className="text-sm font-bold text-slate-900 mb-1.5 underline decoration-yellow-400/50 underline-offset-4">{step.title}</h4>
-                        <p className="text-[13px] text-slate-500 leading-normal mb-3">{step.description}</p>
-                        <div className="flex flex-wrap gap-4">
-                          <span className="text-[11px] font-semibold text-slate-400 flex items-center gap-1.5"><Utensils size={12} className="text-yellow-600"/> {step.meals.join(', ')}</span>
-                          <span className="text-[11px] font-semibold text-slate-400 flex items-center gap-1.5"><Bed size={12} className="text-yellow-600"/> {step.accommodation}</span>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div> */}
-
               <ItineraryAccordion tour={tour}/>
 
               <div className="p-6 grid md:grid-cols-2 gap-8 bg-slate-50/30">
@@ -204,18 +381,15 @@ const TourDetails = () => {
                   <div className="space-y-2">
                     <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wide">Travel Date</label>
                     <div className="relative">
-                      <select 
+                      <input 
+                      type="date"
                         value={bookingData.startDate}
                         onChange={(e) => setBookingData(p => ({ ...p, startDate: e.target.value }))}
                         className="w-full border border-slate-200 bg-slate-50 text-sm p-3 rounded-lg appearance-none focus:ring-2 focus:ring-yellow-400/20 focus:border-yellow-400 outline-none transition-all"
-                      >
-                        {tour.startDates.map((date, i) => (
-                          <option key={i} value={date}>
-                            {new Date(date).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}
-                          </option>
-                        ))}
-                      </select>
-                      <Calendar className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" size={14}/>
+                      />
+                        
+                      
+                      {/* <Calendar className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" size={14}/> */}
                     </div>
                   </div>
 

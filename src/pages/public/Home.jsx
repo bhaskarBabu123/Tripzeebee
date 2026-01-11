@@ -10,6 +10,7 @@ import {
 import axios from 'axios';
 import HeroSection from './HeroSection';
 import TripzyHeroFooter from './TripzyHeroFooter';
+import FeaturedToursSection from './FeaturedToursSection';
 
 const Home = () => {
   const [featuredTours, setFeaturedTours] = useState([]);
@@ -29,6 +30,12 @@ const Home = () => {
       setLoading(false);
     }
   };
+   const getYouTubeId = (url) => {
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+  const match = url.match(regExp);
+  return match && match[2].length === 11 ? match[2] : null;
+};
+
 
   return (
     <div className="min-h-screen bg-white text-slate-900 selection:bg-amber-100">
@@ -58,120 +65,10 @@ const Home = () => {
       {/* <TripzyHeroFooter/> */}
 
       {/* --- SECTION 2: CORE INVENTORY (Main Tour Cards) --- */}
-   <section className="py-16 md:py-24 bg-slate-50/50">
-  <div className="max-w-7xl mx-auto px-4 md:px-6">
-    {/* Header Section */}
-    <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-16 gap-4">
-      <div>
-        <div className="flex items-center gap-2 mb-2">
-          <div className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
-          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-amber-600">Upcoming Trips</p>
-        </div>
-        <h2 className="text-3xl md:text-5xl font-black tracking-tighter">Our Best Travel  <span className="text-amber-500">Packages</span></h2>
-      </div>
-      <Link to="/tours" className="hidden md:flex items-center gap-2 text-xs font-black uppercase tracking-widest border-b-2 border-slate-900 pb-1 hover:text-amber-500 hover:border-amber-500 transition-all">
-        Explore Tours <ArrowRight size={14} />
-      </Link>
-    </div>
-
-    {/* Cards Grid */}
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-      {featuredTours.slice(0, 3).map((tour) => (
-        <div key={tour._id} className="group bg-white rounded-[2rem] border border-slate-200/60 overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] transition-all duration-500">
-          
-          {/* Image Container */}
-          <div className="relative h-56 md:h-64 overflow-hidden">
-            <img 
-              src={tour.images[0]?.url} 
-              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
-              alt={tour.title} 
-            />
-            {/* Overlay Badges */}
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent" />
-            <div className="absolute top-4 left-4 right-4 flex justify-between items-start">
-              <span className="px-3 py-1 bg-white/90 backdrop-blur-md text-slate-900 text-[9px] font-black uppercase rounded-lg shadow-sm">
-                {tour.category || 'Expedition'}
-              </span>
-              <div className="flex flex-col gap-2 items-end">
-                <div className="bg-emerald-500 text-white px-2 py-1 rounded-md text-[8px] font-black uppercase flex items-center gap-1">
-                  <Activity size={10} /> Active
-                </div>
-              </div>
-            </div>
-            
-            {/* Bottom Info Bar on Image */}
-            <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center text-white">
-              <div className="flex items-center gap-2">
-                <MapPin size={12} className="text-amber-500" />
-                <span className="text-[10px] font-bold uppercase tracking-wider">{tour.location || 'Multi-City'}</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <Star size={12} className="fill-amber-500 text-amber-500" />
-                <span className="text-[10px] font-black">{tour.rating?.average || '4.9'}</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Content Body */}
-          <div className="p-6 md:p-8">
-            <h3 className="text-xl font-black mb-3 text-slate-900 group-hover:text-amber-600 transition-colors line-clamp-1">
-              {tour.title}
-            </h3>
-            
-            {/* Spec Grid: More content here */}
-            {/* <div className="grid grid-cols-3 gap-2 mb-6">
-              <div className="bg-slate-50 p-2 rounded-xl text-center border border-slate-100">
-                <p className="text-[8px] font-black text-slate-400 uppercase mb-1">Duration</p>
-                <p className="text-[10px] font-bold text-slate-700">{tour.duration.days}D / {tour.duration.nights}N</p>
-              </div>
-              <div className="bg-slate-50 p-2 rounded-xl text-center border border-slate-100">
-                <p className="text-[8px] font-black text-slate-400 uppercase mb-1">Capacity</p>
-                <p className="text-[10px] font-bold text-slate-700">{tour.groupSize.max} Pax</p>
-              </div>
-              <div className="bg-slate-50 p-2 rounded-xl text-center border border-slate-100">
-                <p className="text-[8px] font-black text-slate-400 uppercase mb-1">Level</p>
-                <p className="text-[10px] font-bold text-slate-700">Moderate</p>
-              </div>
-            </div> */}
-
-            {/* Highlights Section */}
-            <div className="space-y-2 mb-8">
-               <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Core Highlights</p>
-               <div className="flex flex-wrap gap-2">
-                 {['Private Transport', 'Handpicked Stays', 'Expert Guide'].map((tag, i) => (
-                   <span key={i} className="text-[9px] font-bold text-slate-500 flex items-center gap-1">
-                     <CheckCircle size={10} className="text-emerald-500" /> {tag}
-                   </span>
-                 ))}
-               </div>
-            </div>
-
-            {/* Pricing and Action */}
-            <div className="flex items-center justify-between pt-6 border-t border-slate-100">
-              <div>
-                <p className="text-[9px] font-black text-slate-400 uppercase tracking-tighter">Starting From</p>
-                <div className="flex items-baseline gap-1">
-                  <span className="text-2xl font-black text-slate-900">₹{tour.price.toLocaleString()}</span>
-                  <span className="text-[10px] text-slate-400 font-bold">/pp</span>
-                </div>
-              </div>
-              <Link to={`/tours/${tour._id}`} className="flex items-center justify-center w-12 h-12 rounded-2xl bg-slate-900 text-white group-hover:bg-amber-500 group-hover:text-slate-900 transition-all duration-300 shadow-lg">
-                <ArrowUpRight size={20} />
-              </Link>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-    
-    {/* Mobile Only: View All Button */}
-    <div className="mt-10 md:hidden">
-      <Link to="/tours" className="flex items-center justify-center w-full bg-slate-900 text-white py-4 rounded-xl text-xs font-black uppercase tracking-widest">
-        Explore All Deployments
-      </Link>
-    </div>
-  </div>
-</section>
+  <FeaturedToursSection 
+  isLoading={loading} 
+  featuredTours={featuredTours} 
+/>
 
       {/* --- SECTION 3: THE LUXURY LAYER (Tier-1 Experiences) --- */}
       <section className="py-24 bg-slate-900 text-white relative">

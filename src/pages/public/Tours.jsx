@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { 
-  Search, Filter, Star, Clock, Users, MapPin, Calendar, ChevronDown, 
+  Search, Filter, Star, Clock, Users, MapPin, ChevronDown, 
   Grid, List, X, ChevronLeft, ChevronRight, ArrowRight 
 } from 'lucide-react';
 import axios from 'axios';
@@ -84,57 +84,120 @@ const Tours = () => {
   };
 
   const getYouTubeId = (url) => {
-  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-  const match = url.match(regExp);
-  return match && match[2].length === 11 ? match[2] : null;
-};
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+    return match && match[2].length === 11 ? match[2] : null;
+  };
+
+  // Skeleton Card Component
+  const SkeletonTourCard = ({ isListView = false }) => (
+    <div className="group bg-white border border-gray-100 rounded-2xl overflow-hidden animate-pulse flex flex-col">
+      {/* Image/Video Container with Shimmer */}
+      <div className={`relative overflow-hidden ${isListView ? 'h-32 sm:h-36' : 'h-44 sm:h-52'} bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200`}>
+        {/* Shimmer overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer" />
+        
+        {/* Skeleton badges */}
+        <div className="absolute top-3 left-3 w-16 h-5 bg-white/80 rounded-full" />
+        <div className="absolute top-3 right-3 w-16 h-6 bg-white/80 rounded-full flex items-center gap-1" />
+        <div className="absolute bottom-2 left-3 w-20 h-5 bg-red-500/80 rounded-full" />
+      </div>
+      
+      {/* Content Body Skeleton */}
+      <div className="p-4 flex flex-col flex-1 space-y-3">
+        {/* Title */}
+        <div className="h-5 bg-gray-200 rounded w-4/5" />
+        <div className="h-4 bg-gray-200 rounded w-3/5" />
+        
+        {/* Description */}
+        <div className="h-3 bg-gray-200 rounded w-full flex-1" />
+        <div className="h-3 bg-gray-200 rounded w-5/6" />
+        
+        {/* Duration & Group Size */}
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-1">
+            <div className="w-6 h-6 bg-gray-200 rounded-full" />
+            <div className="h-3 bg-gray-200 rounded w-12" />
+          </div>
+          <div className="flex items-center gap-1">
+            <div className="w-6 h-6 bg-gray-200 rounded-full" />
+            <div className="h-3 bg-gray-200 rounded w-12" />
+          </div>
+        </div>
+        
+        {/* Price Section */}
+        <div className="flex items-center justify-between pt-2 border-t border-gray-100 border-opacity-50 mt-auto">
+          <div className="space-y-1">
+            <div className="h-3 bg-gray-200 rounded w-16" />
+            <div className="flex items-baseline gap-1">
+              <div className="h-6 bg-gray-200 rounded w-16" />
+            </div>
+          </div>
+          <div className="h-6 w-16 bg-gray-200 rounded-full" />
+        </div>
+      </div>
+    </div>
+  );
+
+  // Skeleton Grid (8 cards for realistic loading)
+  const SkeletonGrid = ({ isListView = false }) => (
+    <div className={
+      isListView === 'grid' 
+        ? 'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-4 lg:gap-6'
+        : 'space-y-4 lg:space-y-6'
+    }>
+      {[...Array(isListView === 'grid' ? 8 : 6)].map((_, i) => (
+        <SkeletonTourCard key={`skeleton-${i}`} isListView={isListView === 'list'} />
+      ))}
+    </div>
+  );
 
   const TourCard = ({ tour, isListView = false }) => (
     <Link to={`/tours/${tour._id}`} className="group bg-white border border-gray-100 rounded-2xl overflow-hidden hover:border-gray-200 transition-all duration-200 flex flex-col">
-   <div className={`relative overflow-hidden ${isListView ? 'h-32 sm:h-36' : 'h-44 sm:h-52'} bg-black`}>
-  {/* Inner wrapper for cover simulation */}
-  <div className="absolute inset-0 overflow-hidden">
-    <iframe
-      src={`https://www.youtube-nocookie.com/embed/${getYouTubeId(tour.video)}?autoplay=1&mute=1&loop=1&playlist=${getYouTubeId(tour.video)}&controls=0&disablekb=1&fs=0&rel=0&iv_load_policy=3&playsinline=1`}
-      title="Manali adventure background"
-      frameBorder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      className="
-        absolute top-1/2 left-1/2
-        w-[100vw] h-[56.25vw]          /* default for min-aspect 16:9 */
-        min-w-full min-h-full
-        -translate-x-1/2 -translate-y-1/2
-        sm:w-[177.78vh] sm:h-[100vh]   /* override for taller containers */
-        group-hover:scale-110
-        transition-transform duration-700 ease-out
-        pointer-events-none
-      "
-    />
-  </div>
+      <div className={`relative overflow-hidden ${isListView ? 'h-32 sm:h-36' : 'h-44 sm:h-52'} bg-black`}>
+        {/* Inner wrapper for cover simulation */}
+        <div className="absolute inset-0 overflow-hidden">
+          <iframe
+            src={`https://www.youtube-nocookie.com/embed/${getYouTubeId(tour.video)}?autoplay=1&mute=1&loop=1&playlist=${getYouTubeId(tour.video)}&controls=0&disablekb=1&fs=0&rel=0&iv_load_policy=3&playsinline=1`}
+            title="Manali adventure background"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            className="
+              absolute top-1/2 left-1/2
+              w-[100vw] h-[56.25vw]           
+              min-w-full min-h-full
+              -translate-x-1/2 -translate-y-1/2
+              sm:w-[177.78vh] sm:h-[100vh]   
+              group-hover:scale-110
+              transition-transform duration-700 ease-out
+              pointer-events-none
+            "
+          />
+        </div>
 
-  {/* Strong overlay to dim remaining YouTube watermark/logo (bottom-right) */}
-  <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/70 pointer-events-none" />
+        {/* Strong overlay to dim remaining YouTube watermark/logo (bottom-right) */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/70 pointer-events-none" />
 
-  {/* Your badges - stay on top */}
-  <div className="absolute inset-0 z-10 flex flex-col justify-between p-3 pointer-events-none">
-    <div className="flex justify-between">
-      <div className="bg-black/70 text-xs text-amber-300 px-2 py-1 rounded-full">
-        {tour.tourType}
-      </div>
-      <div className="bg-white/80 px-2 py-1 rounded-full flex items-center gap-0.5 text-[11px] backdrop-blur-sm">
-        <Star className="w-3 h-3 text-amber-500 fill-amber-500" />
-        <span>{tour.rating?.average || 4.5}</span>
-      </div>
-    </div>
+        {/* Your badges - stay on top */}
+        <div className="absolute inset-0 z-10 flex flex-col justify-between p-3 pointer-events-none">
+          <div className="flex justify-between">
+            <div className="bg-black/70 text-xs text-amber-300 px-2 py-1 rounded-full">
+              {tour.tourType}
+            </div>
+            <div className="bg-white/80 px-2 py-1 rounded-full flex items-center gap-0.5 text-[11px] backdrop-blur-sm">
+              <Star className="w-3 h-3 text-amber-500 fill-amber-500" />
+              <span>{tour.rating?.average || 4.5}</span>
+            </div>
+          </div>
 
-    {tour.originalPrice && (
-      <div className="self-start bg-red-600/90 text-white text-[10px] px-2 py-0.5 rounded-full font-medium backdrop-blur-sm">
-        SAVE ₹{(tour.originalPrice - tour.price).toLocaleString()}
+          {tour.originalPrice && (
+            <div className="self-start bg-red-600/90 text-white text-[10px] px-2 py-0.5 rounded-full font-medium backdrop-blur-sm">
+              SAVE ₹{(tour.originalPrice - tour.price).toLocaleString()}
+            </div>
+          )}
+        </div>
       </div>
-    )}
-  </div>
-</div>
-      
+       
       <div className="p-4 flex flex-col flex-1">
         <h3 className="font-semibold text-sm sm:text-base line-clamp-2 mb-2 group-hover:text-amber-700 transition-colors">{tour.title}</h3>
         <p className="text-xs text-gray-600 line-clamp-2 mb-3 flex-1">{tour.shortDescription}</p>
@@ -390,11 +453,9 @@ const Tours = () => {
               </div>
             </div>
 
-            {/* Loading */}
+            {/* Enhanced Loading with Skeleton Grid */}
             {loading ? (
-              <div className="grid place-items-center h-64">
-                <div className="w-8 h-8 border border-amber-500 border-t-transparent rounded-full animate-spin" />
-              </div>
+              <SkeletonGrid isListView={viewMode} />
             ) : tours.length === 0 ? (
               <div className="text-center py-20">
                 <MapPin className="w-16 h-16 text-gray-300 mx-auto mb-4" />
