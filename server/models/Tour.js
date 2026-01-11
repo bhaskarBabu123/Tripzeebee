@@ -35,6 +35,9 @@ const tourSchema = new mongoose.Schema({
   originalPrice: {
     type: Number
   },
+  video:{
+    type:String,
+  },
   images: [{
     url: {
       type: String,

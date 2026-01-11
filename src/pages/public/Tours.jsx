@@ -83,27 +83,57 @@ const Tours = () => {
     handleFilterChange('page', page);
   };
 
+  const getYouTubeId = (url) => {
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+  const match = url.match(regExp);
+  return match && match[2].length === 11 ? match[2] : null;
+};
+
   const TourCard = ({ tour, isListView = false }) => (
     <Link to={`/tours/${tour._id}`} className="group bg-white border border-gray-100 rounded-2xl overflow-hidden hover:border-gray-200 transition-all duration-200 flex flex-col">
-      <div className={`relative overflow-hidden ${isListView ? 'h-32 sm:h-36' : 'h-44 sm:h-52'}`}>
-        <img
-          src={tour.images[0]?.url}
-          alt={tour.title}
-          className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
-        />
-        <div className="absolute left-3 top-3 bg-black/70 text-xs text-amber-300 px-2 py-1 rounded-full">
-          {tour.tourType}
-        </div>
-        <div className="absolute right-3 top-3 bg-white/90 px-2 py-1 rounded-full flex items-center gap-0.5 text-[11px]">
-          <Star className="w-3 h-3 text-amber-500 fill-amber-500" />
-          <span>{tour.rating?.average || 4.5}</span>
-        </div>
-        {tour.originalPrice && (
-          <div className="absolute bottom-2 left-2 bg-red-500 text-white text-[10px] px-2 py-0.5 rounded-full font-medium">
-            SAVE ₹{(tour.originalPrice - tour.price).toLocaleString()}
-          </div>
-        )}
+   <div className={`relative overflow-hidden ${isListView ? 'h-32 sm:h-36' : 'h-44 sm:h-52'} bg-black`}>
+  {/* Inner wrapper for cover simulation */}
+  <div className="absolute inset-0 overflow-hidden">
+    <iframe
+      src={`https://www.youtube-nocookie.com/embed/${getYouTubeId(tour.video)}?autoplay=1&mute=1&loop=1&playlist=${getYouTubeId(tour.video)}&controls=0&disablekb=1&fs=0&rel=0&iv_load_policy=3&playsinline=1`}
+      title="Manali adventure background"
+      frameBorder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      className="
+        absolute top-1/2 left-1/2
+        w-[100vw] h-[56.25vw]          /* default for min-aspect 16:9 */
+        min-w-full min-h-full
+        -translate-x-1/2 -translate-y-1/2
+        sm:w-[177.78vh] sm:h-[100vh]   /* override for taller containers */
+        group-hover:scale-110
+        transition-transform duration-700 ease-out
+        pointer-events-none
+      "
+    />
+  </div>
+
+  {/* Strong overlay to dim remaining YouTube watermark/logo (bottom-right) */}
+  <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/70 pointer-events-none" />
+
+  {/* Your badges - stay on top */}
+  <div className="absolute inset-0 z-10 flex flex-col justify-between p-3 pointer-events-none">
+    <div className="flex justify-between">
+      <div className="bg-black/70 text-xs text-amber-300 px-2 py-1 rounded-full">
+        {tour.tourType}
       </div>
+      <div className="bg-white/80 px-2 py-1 rounded-full flex items-center gap-0.5 text-[11px] backdrop-blur-sm">
+        <Star className="w-3 h-3 text-amber-500 fill-amber-500" />
+        <span>{tour.rating?.average || 4.5}</span>
+      </div>
+    </div>
+
+    {tour.originalPrice && (
+      <div className="self-start bg-red-600/90 text-white text-[10px] px-2 py-0.5 rounded-full font-medium backdrop-blur-sm">
+        SAVE ₹{(tour.originalPrice - tour.price).toLocaleString()}
+      </div>
+    )}
+  </div>
+</div>
       
       <div className="p-4 flex flex-col flex-1">
         <h3 className="font-semibold text-sm sm:text-base line-clamp-2 mb-2 group-hover:text-amber-700 transition-colors">{tour.title}</h3>
@@ -381,7 +411,7 @@ const Tours = () => {
               <>
                 <div className={
                   viewMode === 'grid' 
-                    ? 'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-6'
+                    ? 'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-4 lg:gap-6'
                     : 'space-y-4 lg:space-y-6'
                 }>
                   {tours.map((tour) => (
