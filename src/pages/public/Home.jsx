@@ -185,10 +185,10 @@ const Home = () => {
             </div>
             <div className="grid grid-cols-2 gap-4">
                <div className="aspect-[3/4] rounded-[3rem] overflow-hidden translate-y-8 shadow-2xl border border-white/10">
-                 <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=2070" className="w-full h-full object-cover brightness-75" alt="Luxury Travel India 2026" />
+                 <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=2070" className="w-full h-full object-cover brightness-75" alt="Luxury Travel India 2026 | TripzyBee" />
                </div>
                <div className="aspect-[3/4] rounded-[3rem] overflow-hidden shadow-2xl border border-white/10">
-                 <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2070" className="w-full h-full object-cover brightness-75" alt="Premium Solo Destinations" />
+                 <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2070" className="w-full h-full object-cover brightness-75" alt="Premium Solo Destinations | TripzyBee" />
                </div>
             </div>
           </div>
