@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://tripzybee.com/</loc>
+    <lastmod>2026-01-19</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://tripzybee.com/tours</loc>
+    <lastmod>2026-01-19</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://tripzybee.com/about-us</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://tripzybee.com/contact-us</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://tripzybee.com/privacy-policy</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://tripzybee.com/terms-and-conditions</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://tripzybee.com/refund-policy</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://tripzybee.com/sitemap</loc>
+    <priority>0.5</priority>
+  </url>
+</urlset>
