@@ -1,0 +1,17 @@
+# Tripzybee SEO Protocol
+User-agent: *
+Allow: /
+Allow: /tours
+Allow: /about-us
+Allow: /privacy-policy
+Allow: /contact-us
+
+# Protect Private Infrastructure
+Disallow: /admin/
+Disallow: /account/
+Disallow: /user/
+Disallow: /login
+Disallow: /register
+
+# Sitemap Location
+Sitemap: https://tripzybee.com/sitemap.xml

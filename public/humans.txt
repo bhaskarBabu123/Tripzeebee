@@ -1,0 +1,12 @@
+/* TEAM */
+Chef: Sonusign
+Contact: tripzybee@gmail.com
+Twitter: @yourhandle
+Location: Lakshmi Tarang Society, RMV 2nd Stage,
+Sanjayanagara, Bengaluru, KA 560094
+
+/* SITE */
+Last update: 2026/01/19
+Standards: HTML5, CSS3
+Components: React, Tailwind (or list your tech stack)
+Software: VS Code

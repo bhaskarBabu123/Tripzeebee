@@ -1,0 +1,5 @@
+Contact: mailto:tripzybee@gmail.com
+Expires: 2027-01-01T00:00:00.000Z
+Acknowledgments: https://tripzybee.com/thanks/
+Preferred-Languages: en
+Canonical: https://tripzybee.com/.well-known/security.txt
