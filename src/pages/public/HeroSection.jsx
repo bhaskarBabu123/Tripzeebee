@@ -12,6 +12,7 @@ import video from "./hero_bg2.mp4";
 // import HeroMobile from "../../assets/HeroMobile.mp4";
 import HeroLaptop from "../../assets/hampi.mp4";
 import HeroMobile from "../../assets/hampi.mp4";
+import { Helmet } from "react-helmet-async";
 
 const HeroSection = () => {
   const [sWidth, setSWidth] = useState(window.innerWidth);
