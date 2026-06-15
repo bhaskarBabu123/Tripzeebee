@@ -41,6 +41,7 @@ import HeroSection from "./HeroSection";
 import FeaturedToursSection from "./FeaturedToursSection";
 import ReelExperienceSection from "./InstagramExperienceSection";
 import RegionSlider from "./RegionSlider";
+import Hello from "./Hello";
 
 const Home = () => {
   const [featuredTours, setFeaturedTours] = useState([]);

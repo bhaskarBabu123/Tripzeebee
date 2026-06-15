@@ -8,8 +8,10 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import video from "./hero_bg2.mp4";
-import HeroLaptop from "../../assets/HeroLaptop.mp4";
-import HeroMobile from "../../assets/HeroMobile.mp4";
+// import HeroLaptop from "../../assets/HeroLaptop.mp4";
+// import HeroMobile from "../../assets/HeroMobile.mp4";
+import HeroLaptop from "../../assets/hampi.mp4";
+import HeroMobile from "../../assets/hampi.mp4";
 
 const HeroSection = () => {
   const [sWidth, setSWidth] = useState(window.innerWidth);
@@ -26,7 +28,71 @@ const HeroSection = () => {
   const desktopVideo = HeroLaptop;
 
   return (
-    <div className="relative min-h-screen w-full bg-[#0a0a0a] text-white overflow-hidden font-sans">
+    <>
+  <Helmet>
+    <title>
+      TripzyBee | Group Tours, Solo Trips, Treks & Adventure Travel India
+    </title>
+
+    <meta
+      name="description"
+      content="TripzyBee is India's trusted travel community offering group tours, solo trips, trekking adventures, backpacking expeditions, Ladakh bike trips, Himalayan journeys and curated travel experiences."
+    />
+
+    <meta
+      name="keywords"
+      content="TripzyBee, group tours India, solo travel India, trekking tours, backpacking trips, Ladakh bike trip, Himalayan tours, travel community India, adventure travel India, weekend getaways"
+    />
+
+    <meta name="author" content="TripzyBee" />
+
+    <meta
+      property="og:title"
+      content="TripzyBee | Solo Friendly Group Trips Across India"
+    />
+
+    <meta
+      property="og:description"
+      content="Explore curated group tours, trekking adventures, backpacking journeys and unforgettable travel experiences with TripzyBee."
+    />
+
+    <meta property="og:type" content="website" />
+
+    <meta property="og:url" content="https://www.tripzybee.com/" />
+
+    <meta
+      property="og:image"
+      content="https://www.tripzybee.com/og-image.jpg"
+    />
+
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <meta
+      name="twitter:title"
+      content="TripzyBee | Group Tours & Solo Adventures"
+    />
+
+    <meta
+      name="twitter:description"
+      content="India's travel community for solo travelers, group tours, trekking and adventure trips."
+    />
+
+    <link rel="canonical" href="https://www.tripzybee.com/" />
+
+    <script type="application/ld+json">
+      {JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "TravelAgency",
+        name: "TripzyBee",
+        url: "https://www.tripzybee.com",
+        description:
+          "India's travel community for group tours, solo travel, trekking adventures and curated travel experiences.",
+        logo: "https://www.tripzybee.com/logo.png",
+      })}
+    </script>
+  </Helmet>
+
+   <div className="relative min-h-screen w-full bg-[#0a0a0a] text-white overflow-hidden font-sans">
       {/* --- CINEMATIC BACKGROUND (VIDEO) --- */}
       <div className="absolute inset-0 z-0">
         <video
@@ -133,6 +199,8 @@ const HeroSection = () => {
         </div>
       </main>
     </div>
+</>
+  
   );
 };
 

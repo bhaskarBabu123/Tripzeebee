@@ -62,7 +62,7 @@ function App() {
                   <Route index element={<Home />} />
                   <Route path="tours" element={<Tours />} />
                   <Route path="tours/:id" element={<TourDetails />} />
-                  <Route path="about-us" element={<About />} /> {/* Updated for better SEO keyword */}
+                  <Route path="about-tripzybee" element={<About />} /> {/* Updated for better SEO keyword */}
                   
                   {/* Legal Cluster - Matching Footer & Sitemap Links */}
                   <Route path="privacy-policy" element={<PrivacyPolicy />} />

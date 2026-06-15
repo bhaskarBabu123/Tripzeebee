@@ -94,89 +94,91 @@ const Checkout = () => {
   };
 
   // Payment Handler (exact same pattern as UserBookings)
-  const handlePayment = async () => {
-    if (!validateForm()) return;
+const handlePayment = async () => {
+  if (!validateForm()) return;
+  setLoading(true);
 
-    setLoading(true);
-
-    try {
-      const isLoaded = await loadRazorpay();
-      if (!isLoaded) {
-        toast.error('Razorpay SDK failed to load. Check your internet connection.');
-        setLoading(false);
-        return;
-      }
-
-      const firstItem = bookingItems[0];
-
-      const { data: orderData } = await axios.post('/bookings/create-order', {
-        tourId: firstItem.tour._id,
-        travelers: bookingData.travelers,
-        startDate: firstItem.startDate,
-        totalPrice: getTotalPrice(),
-        specialRequests: bookingData.specialRequests
-      });
-
-      const options = {
-        key: orderData.key,
-        amount: orderData.amount * 100,
-        currency: orderData.currency,
-        name: 'Tripzybee',
-        description: `Booking for ${firstItem.tour.title}`,
-        order_id: orderData.orderId,
-        handler: async (response) => {
-          try {
-            await axios.post('/bookings/verify-payment', {
-              razorpay_order_id: response.razorpay_order_id,
-              razorpay_payment_id: response.razorpay_payment_id,
-              razorpay_signature: response.razorpay_signature,
-              bookingId: orderData.bookingId
-            });
-
-            toast.success('Payment successful! Your trip is confirmed 🎉');
-
-            if (!location.state?.tour) {
-              await clearCart();
-            }
-
-            navigate(`/user/booking-success/${orderData.bookingId}`);
-          } catch (error) {
-            console.error('Verification error:', error);
-            toast.error('Payment verification failed. Please contact support.');
-          }
-        },
-        prefill: {
-          name: user?.name || '',
-          email: user?.email || '',
-          contact: user?.phone || ''
-        },
-        theme: { color: '#FBBF24' },
-        modal: {
-          ondismiss: () => {
-            toast.info('Payment cancelled');
-            setLoading(false);
-          }
-        }
-      };
-
-      const rzp = new window.Razorpay(options);
-      rzp.on('payment.failed', (response) => {
-        toast.error('Payment failed. Please try again.');
-        console.error(response.error);
-      });
-
-      rzp.open();
-
-    } catch (error) {
-      console.error('Payment initiation error:', error);
-      toast.error(
-        error.response?.data?.message || 
-        'Failed to initiate payment. Please try again.'
-      );
-    } finally {
+  try {
+    const isLoaded = await loadRazorpay();
+    if (!isLoaded) {
+      toast.error('Razorpay SDK failed to load.');
       setLoading(false);
+      return;
     }
-  };
+
+    const firstItem = bookingItems[0];
+
+    const { data: orderData } = await axios.post('/bookings/create-order', {
+      tourId: firstItem.tour._id,
+      travelers: bookingData.travelers,
+      startDate: firstItem.startDate,
+      totalPrice: getTotalPrice(),
+      specialRequests: bookingData.specialRequests
+    });
+
+    // ✅ Log to verify what backend returns
+    console.log('Order Data:', orderData);
+
+    const options = {
+      key: orderData.key,
+      amount: orderData.amount * 100,   // rupees → paise
+      currency: orderData.currency || 'INR',
+      name: 'Tripzybee',
+      description: `Booking for ${firstItem.tour.title}`,
+      order_id: orderData.orderId,       // ✅ must match what Razorpay created
+      handler: async (response) => {
+        try {
+          const { data } = await axios.post('/bookings/verify-payment', {
+            razorpay_order_id: response.razorpay_order_id,
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_signature: response.razorpay_signature,
+            bookingId: orderData.bookingId
+          });
+
+          toast.success('Payment successful! Your trip is confirmed 🎉');
+
+          if (!location.state?.tour) {
+            await clearCart();
+          }
+
+          navigate(`/user/booking-success/${orderData.bookingId}`);
+        } catch (error) {
+          console.error('Verification error:', error);
+          toast.error('Payment verification failed. Please contact support.');
+        }
+      },
+      prefill: {
+        name: user?.name || '',
+        email: user?.email || '',
+        contact: user?.phone || ''
+      },
+      theme: { color: '#FBBF24' },
+      modal: {
+        ondismiss: () => {
+          toast('Payment cancelled', { icon: 'ℹ️' });
+          setLoading(false);
+        }
+      }
+    };
+
+    const rzp = new window.Razorpay(options);
+
+    rzp.on('payment.failed', (response) => {
+      console.error('Payment failed:', response.error);
+      toast.error(`Payment failed: ${response.error.description}`);
+      setLoading(false);
+    });
+
+    rzp.open();
+
+  } catch (error) {
+    console.error('Payment initiation error:', error);
+    toast.error(error.response?.data?.message || 'Failed to initiate payment.');
+    setLoading(false);  // ✅ also reset here, not just in finally
+  } finally {
+    setLoading(false);
+  }
+};
 
   const getTotalPrice = () => bookingItems.reduce((sum, item) => sum + item.price, 0);
 

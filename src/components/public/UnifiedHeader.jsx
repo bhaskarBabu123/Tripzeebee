@@ -16,7 +16,7 @@ const UnifiedHeader = () => {
   // 1. PUBLIC LINKS (Always visible)
   const publicLinks = [
     { name: 'Home', href: '/' },
-    { name: 'About', href: '/about-us' },
+    { name: 'About', href: '/about-tripzybee' },
     { name: 'Tours', href: '/tours' },
     // { name: 'Visa', href: '/visa' },
     { name: 'Contact', href: '/contact-us' },

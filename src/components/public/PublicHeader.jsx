@@ -13,7 +13,7 @@ const PublicHeader = ({ isMobileMenuOpen, setIsMobileMenuOpen }) => {
   const navigation = [
     { name: 'Home', href: '/', current: location.pathname === '/' },
     { name: 'Tours', href: '/tours', current: location.pathname === '/tours' },
-    { name: 'About', href: '/about-us', current: location.pathname === '/about-us' },
+    { name: 'About', href: '/about-tripzybee', current: location.pathname === '/about-tripzybee' },
     { name: 'Contact', href: '/contact-us', current: location.pathname === '/contact-us' }
   ];
 

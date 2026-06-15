@@ -20,10 +20,13 @@ import {
   Mountain,
   Backpack,
   Heart,
+  BatteryWarning,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import aboutImage from "../../assets/about.png";
 import SEO from "../../seo/SEO";
+
+
 
 const About = () => {
   return (
@@ -60,7 +63,9 @@ const About = () => {
 
         <div className="relative z-10 text-center px-6 max-w-5xl">
           <h1 className="text-6xl md:text-[9rem] font-black leading-none tracking-tighter italic uppercase text-white mb-6">
-            Travel <br /> <span className="text-amber-500">Together.</span>
+            Travel <br /> <span className="text-amber-500">Together. 
+              
+            </span>
           </h1>
           <p className="text-slate-200 max-w-2xl mx-auto text-sm md:text-xl font-bold uppercase tracking-widest leading-relaxed">
             The simplest way to explore India with a{" "}

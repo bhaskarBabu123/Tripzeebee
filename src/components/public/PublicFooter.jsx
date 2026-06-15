@@ -85,7 +85,7 @@ const PublicFooter = () => {
               {[
                 { to: "/", label: "Home Dashboard" },
                 { to: "/tours", label: "Explore 2026 Tours" },
-                { to: "/about-us", label: "The Bee Story" },
+                { to: "/about-tripzybee", label: "The Bee Story" },
                 { to: "/contact-us", label: "Concierge Support" },
                 { to: "/privacy-policy", label: "Privacy Governance" },
                 { to: "/terms-and-conditions", label: "Legal Engagement" },
