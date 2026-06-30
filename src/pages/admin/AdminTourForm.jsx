@@ -3,7 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import {
   ArrowLeft, Save, Plus, Trash2, MapPin, DollarSign,
   Users, Image as ImageIcon, Clock, Shield, FileText,
-  Utensils, Car, Star, ChevronDown, ChevronUp, Youtube
+  Utensils, Car, Star, ChevronDown, ChevronUp, Youtube,
+  Upload, File as FileIcon, X, Download
 } from 'lucide-react';
 import axios from 'axios';
 
@@ -159,6 +160,112 @@ const ItineraryDay = ({ day, index, onChange, onArrayChange, onAddArrayItem, onR
   );
 };
 
+// ─── Itinerary File Upload ──────────────────────────────────────────────────────
+
+const ItineraryFileUpload = ({ existingFile, selectedFile, onFileSelect, onClearSelected, onRemoveExisting, uploading }) => {
+  const fileInputRef = React.useRef(null);
+
+  const handleFileChange = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const allowedExt = ['.pdf', '.doc', '.docx'];
+    const ext = '.' + file.name.split('.').pop().toLowerCase();
+    if (!allowedExt.includes(ext)) {
+      alert('Only PDF and Word documents (.pdf, .doc, .docx) are allowed');
+      e.target.value = '';
+      return;
+    }
+    if (file.size > 100 * 1024 * 1024) {
+      alert('File size must be under 10MB');
+      e.target.value = '';
+      return;
+    }
+    onFileSelect(file);
+  };
+
+  return (
+    <div className="space-y-3">
+      <Label>Upload Itinerary Document (PDF / DOC)</Label>
+
+      {/* Existing file (already saved on the tour) */}
+      {existingFile?.url && !selectedFile && (
+        <div className="flex items-center justify-between p-3 border border-gray-200 rounded-xl bg-gray-50">
+          <div className="flex items-center gap-2 min-w-0">
+            <FileIcon className="h-4 w-4 text-gray-500 flex-shrink-0" />
+            <a
+              href={existingFile.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-gray-700 hover:text-yellow-600 truncate underline-offset-2 hover:underline"
+            >
+              {existingFile.originalName || 'Itinerary file'}
+            </a>
+            <a href={existingFile.url} download className="p-1 text-gray-400 hover:text-gray-600 flex-shrink-0">
+              <Download className="h-3.5 w-3.5" />
+            </a>
+          </div>
+          <div className="flex items-center gap-1">
+            <button
+              type="button"
+              onClick={() => fileInputRef.current?.click()}
+              className="text-xs font-semibold text-yellow-600 hover:text-yellow-700 px-2"
+            >
+              Replace
+            </button>
+            <RemoveButton onClick={onRemoveExisting} />
+          </div>
+        </div>
+      )}
+
+      {/* Newly selected file, not yet uploaded */}
+      {selectedFile && (
+        <div className="flex items-center justify-between p-3 border border-yellow-200 rounded-xl bg-yellow-50">
+          <div className="flex items-center gap-2 min-w-0">
+            <FileIcon className="h-4 w-4 text-yellow-600 flex-shrink-0" />
+            <span className="text-sm text-gray-700 truncate">{selectedFile.name}</span>
+            <span className="text-xs text-gray-400 flex-shrink-0">
+              ({(selectedFile.size / (1024 * 1024)).toFixed(2)} MB)
+            </span>
+          </div>
+          <button type="button" onClick={onClearSelected} className="p-1 text-gray-400 hover:text-red-500 flex-shrink-0">
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+      )}
+
+      {/* Dropzone / picker, shown when nothing is selected/saved yet */}
+      {!selectedFile && !existingFile?.url && (
+        <div
+          onClick={() => fileInputRef.current?.click()}
+          className="flex flex-col items-center justify-center gap-2 border-2 border-dashed border-gray-200 rounded-xl py-8 cursor-pointer hover:border-yellow-300 hover:bg-yellow-50/40 transition-colors"
+        >
+          <Upload className="h-6 w-6 text-gray-400" />
+          <p className="text-sm text-gray-500">
+            <span className="font-semibold text-yellow-600">Click to upload</span> itinerary document
+          </p>
+          <p className="text-xs text-gray-400">PDF, DOC, or DOCX — max 10MB</p>
+        </div>
+      )}
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".pdf,.doc,.docx"
+        onChange={handleFileChange}
+        className="hidden"
+      />
+
+      {uploading && (
+        <div className="flex items-center gap-2 text-xs text-gray-500">
+          <div className="animate-spin h-3.5 w-3.5 border-2 border-yellow-400 border-t-transparent rounded-full" />
+          Uploading itinerary file...
+        </div>
+      )}
+    </div>
+  );
+};
+
 // ─── Main Form ─────────────────────────────────────────────────────────────────
 
 const AdminTourForm = () => {
@@ -168,6 +275,13 @@ const AdminTourForm = () => {
 
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [uploadingItinerary, setUploadingItinerary] = useState(false);
+
+  // File the admin has picked locally but not yet uploaded
+  const [selectedItineraryFile, setSelectedItineraryFile] = useState(null);
+  // Whether the admin wants to remove an already-saved itinerary file
+  const [removeExistingItinerary, setRemoveExistingItinerary] = useState(false);
+
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -185,6 +299,7 @@ const AdminTourForm = () => {
     inclusions: [''],
     exclusions: [''],
     itinerary: [{ day: 1, title: '', description: '', activities: [''], meals: [''], accommodation: '' }],
+    itineraryFile: null, // { url, originalName, uploadedAt }
     highlights: [''],
     startDates: [''],
     endDates: [''],
@@ -221,6 +336,7 @@ const AdminTourForm = () => {
         endDates: tour.endDates.map(fmt),
         price: tour.price.toString(),
         originalPrice: tour.originalPrice?.toString() || '',
+        itineraryFile: tour.itineraryFile || null,
       });
     } catch {
       alert('Failed to load tour data');
@@ -306,6 +422,23 @@ const AdminTourForm = () => {
         .map((day, i) => ({ ...day, day: i + 1 }))
     }));
 
+  // ── Itinerary file handlers ─────────────────────────────────────────────────
+  // No network calls here — the file just sits in local state and travels
+  // along with the rest of the form in a single multipart request on submit.
+
+  const handleItineraryFileSelect = (file) => {
+    setSelectedItineraryFile(file);
+    setRemoveExistingItinerary(false);
+  };
+
+  const handleClearSelectedItinerary = () => setSelectedItineraryFile(null);
+
+  const handleRemoveExistingItinerary = () => {
+    setRemoveExistingItinerary(true);
+    setSelectedItineraryFile(null);
+    setFormData(prev => ({ ...prev, itineraryFile: null }));
+  };
+
   // ── Submit ────────────────────────────────────────────────────────────────────
 
   const validateForm = () => {
@@ -322,8 +455,9 @@ const AdminTourForm = () => {
     setSaving(true);
     try {
       const clean = (arr) => arr.filter(v => (typeof v === 'string' ? v.trim() : v));
+      const { itineraryFile, ...rest } = formData;
       const submitData = {
-        ...formData,
+        ...rest,
         price: parseFloat(formData.price),
         originalPrice: formData.originalPrice ? parseFloat(formData.originalPrice) : undefined,
         destinations: clean(formData.destinations),
@@ -344,13 +478,23 @@ const AdminTourForm = () => {
         })),
       };
 
+      let savedTourId = id;
+
       if (isEditing) {
         await axios.put(`/tours/${id}`, submitData);
-        alert('Tour updated successfully!');
       } else {
-        await axios.post('/tours', submitData);
-        alert('Tour created successfully!');
+        const { data: created } = await axios.post('/tours', submitData);
+        savedTourId = created._id;
       }
+
+      // Handle itinerary file changes after the tour record exists
+      if (selectedItineraryFile) {
+        await uploadItineraryFile(savedTourId);
+      } else if (removeExistingItinerary) {
+        await deleteExistingItineraryFile(savedTourId);
+      }
+
+      alert(isEditing ? 'Tour updated successfully!' : 'Tour created successfully!');
       navigate('/admin/tours');
     } catch (error) {
       alert(error.response?.data?.message || 'Failed to save tour');
@@ -385,7 +529,7 @@ const AdminTourForm = () => {
           <button type="button" onClick={() => navigate('/admin/tours')} className="px-4 py-2 text-sm font-medium text-gray-600 bg-white border border-gray-200 rounded-xl hover:bg-gray-50">
             Cancel
           </button>
-          <button type="button" onClick={handleSubmit} disabled={saving}
+          <button type="button" onClick={handleSubmit} disabled={saving || uploadingItinerary}
             className="flex items-center gap-2 px-5 py-2 text-sm font-bold bg-yellow-400 hover:bg-yellow-500 text-gray-900 rounded-xl transition-colors disabled:opacity-50">
             {saving ? <div className="animate-spin h-4 w-4 border-2 border-gray-900 border-t-transparent rounded-full" /> : <Save className="h-4 w-4" />}
             {saving ? 'Saving...' : (isEditing ? 'Update Tour' : 'Create Tour')}
@@ -618,6 +762,20 @@ const AdminTourForm = () => {
             ))}
           </div>
           <AddButton onClick={addItineraryDay} label={`Add Day ${formData.itinerary.length + 1}`} />
+
+          <div className="mt-6 pt-6 border-t border-gray-100">
+            <ItineraryFileUpload
+              existingFile={formData.itineraryFile}
+              selectedFile={selectedItineraryFile}
+              onFileSelect={handleItineraryFileSelect}
+              onClearSelected={handleClearSelectedItinerary}
+              onRemoveExisting={handleRemoveExistingItinerary}
+              uploading={uploadingItinerary}
+            />
+            <p className="mt-2 text-xs text-gray-400">
+              Optional: upload a detailed PDF/Word itinerary. It's saved when you click "{isEditing ? 'Update Tour' : 'Create Tour'}" below.
+            </p>
+          </div>
         </SectionCard>
 
         {/* ── 10. Logistics ── */}
@@ -702,7 +860,7 @@ const AdminTourForm = () => {
             className="px-6 py-2.5 text-sm font-medium text-gray-600 bg-white border border-gray-200 rounded-xl hover:bg-gray-50">
             Cancel
           </button>
-          <button type="submit" disabled={saving}
+          <button type="submit" disabled={saving || uploadingItinerary}
             className="flex items-center gap-2 px-7 py-2.5 text-sm font-bold bg-yellow-400 hover:bg-yellow-500 text-gray-900 rounded-xl disabled:opacity-50">
             {saving ? <div className="animate-spin h-4 w-4 border-2 border-gray-900 border-t-transparent rounded-full" /> : <Save className="h-4 w-4" />}
             {saving ? 'Saving...' : (isEditing ? 'Update Tour' : 'Create Tour')}
