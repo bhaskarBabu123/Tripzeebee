@@ -21,13 +21,6 @@ const regions = [
     tags: ["Heritage", "Coastal"],
     color: "bg-amber-50",
     image: "https://www.gosahin.com/go/d/1566050941_Chikkamagaluru-District.jpg",
-  },
-   {
-    title: "Chikkamagaluru",
-    desc: "Chikmagalur, nestled in the serene Western Ghats of Karnataka, is renowned for its lush coffee plantations, scenic beauty, and tranquil ambience.",
-    tags: ["Heritage", "Coastal"],
-    color: "bg-amber-50",
-    image: "https://www.gosahin.com/go/d/1566050941_Chikkamagaluru-District.jpg",
   }
 ];
 
