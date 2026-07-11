@@ -1,5 +1,5 @@
-import React from 'react';
-import { ChevronDown, Utensils, Bed, MapPin } from 'lucide-react';
+import React from "react";
+import { ChevronDown, Utensils, Bed, MapPin } from "lucide-react";
 
 const ItineraryAccordion = ({ tour }) => {
   return (
@@ -13,8 +13,8 @@ const ItineraryAccordion = ({ tour }) => {
 
       <div className="space-y-4">
         {tour.itinerary.map((step, i) => (
-          <details 
-            key={i} 
+          <details
+            key={i}
             className="group border border-slate-100 rounded-xl bg-white shadow-sm hover:border-yellow-200 transition-all duration-300"
           >
             <summary className="flex items-center justify-between p-4 cursor-pointer list-none">
@@ -23,7 +23,7 @@ const ItineraryAccordion = ({ tour }) => {
                 <span className="flex-shrink-0 w-10 h-10 bg-black  group-hover:bg-gray-800 text-white rounded-lg flex items-center justify-center text-xs font-bold transition-colors border border-slate-100">
                   Day {step.day}
                 </span>
-                
+
                 {/* Title */}
                 <h4 className="text-[15px] font-semibold text-slate-800 group-open:text-yellow-700 transition-colors">
                   {step.title}
@@ -37,28 +37,61 @@ const ItineraryAccordion = ({ tour }) => {
             </summary>
 
             <div className="px-4 pb-5 ml-14 border-t border-slate-50 pt-4">
-              <p className="text-[13px] text-slate-500 leading-relaxed mb-4">
-                {step.description}
-              </p>
-              
-              <div className="flex flex-wrap gap-6 items-center border-t border-slate-50 pt-4">
-                <div className="flex items-center gap-2">
-                  <div className="p-1.5 bg-yellow-50 rounded-md">
-                    <Utensils size={14} className="text-yellow-600" />
-                  </div>
-                  <span className="text-[11px] font-bold text-slate-500 uppercase tracking-tight">
-                    {step.meals.join(' • ')}
-                  </span>
-                </div>
+              {step.description && (
+                <p className="text-[13px] text-slate-500 leading-relaxed mb-4">
+                  {step.description}
+                </p>
+              )}
 
-                <div className="flex items-center gap-2">
-                  <div className="p-1.5 bg-yellow-50 rounded-md">
-                    <Bed size={14} className="text-yellow-600" />
+              {/* Places / Highlights for this day */}
+              {step.activities?.length > 0 && (
+                <div className="mb-4">
+                  <div className="flex items-center gap-2 mb-2.5">
+                    <div className="p-1.5 bg-yellow-50 rounded-md">
+                      <MapPin size={14} className="text-yellow-600" />
+                    </div>
+                    <span className="text-[11px] font-bold text-slate-500 uppercase tracking-tight">
+                      Places & Highlights
+                    </span>
                   </div>
-                  <span className="text-[11px] font-bold text-slate-500 uppercase tracking-tight">
-                    {step.accommodation}
-                  </span>
+                  <ul className="space-y-1.5 pl-1">
+                    {step.activities.map((act, j) => (
+                      <li
+                        key={j}
+                        className="flex items-start gap-2 text-[13px] text-slate-600"
+                      >
+                        <span className="text-yellow-500 mt-1 text-[10px]">
+                          ●
+                        </span>
+                        <span>{act}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
+              )}
+
+              <div className="flex flex-wrap gap-6 items-center border-t border-slate-50 pt-4">
+                {step.meals?.length > 0 && (
+                  <div className="flex items-center gap-2">
+                    <div className="p-1.5 bg-yellow-50 rounded-md">
+                      <Utensils size={14} className="text-yellow-600" />
+                    </div>
+                    <span className="text-[11px] font-bold text-slate-500 uppercase tracking-tight">
+                      {step.meals.join(" • ")}
+                    </span>
+                  </div>
+                )}
+
+                {step.accommodation && (
+                  <div className="flex items-center gap-2">
+                    <div className="p-1.5 bg-yellow-50 rounded-md">
+                      <Bed size={14} className="text-yellow-600" />
+                    </div>
+                    <span className="text-[11px] font-bold text-slate-500 uppercase tracking-tight">
+                      {step.accommodation}
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
           </details>
