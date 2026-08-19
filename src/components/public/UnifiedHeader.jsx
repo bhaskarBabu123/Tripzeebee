@@ -42,7 +42,7 @@ const UnifiedHeader = () => {
           {/* LOGO */}
           <div className="flex items-center gap-10">
             <Link to="/" className="flex items-center gap-2 group">
-              <img src={logo} alt="" width="80" />
+              <img src={logo} alt="" width="60" />
             </Link>
 
             {/* DESKTOP NAV: Combines Public + User Links */}
