@@ -49,7 +49,7 @@ const PublicFooter = () => {
             >
               <img
                 src={logo}
-                width={150}
+                width={80}
                 alt="Tripzybee Official Logo"
                 className="brightness-110"
               />
