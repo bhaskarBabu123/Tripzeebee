@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Plane, LogOut, User, Calendar, Settings, ChevronDown, LayoutDashboard, Heart, Compass, Info, Phone, ShoppingCart } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useCart } from '../../context/CartContext';
-import logo from '../../assets/logo.png'
+import logo from './logo.png'
 const UnifiedHeader = () => {
   const { user, logout, isAuthenticated } = useAuth();
   const { getCartItemsCount } = useCart();
@@ -42,7 +42,7 @@ const UnifiedHeader = () => {
           {/* LOGO */}
           <div className="flex items-center gap-10">
             <Link to="/" className="flex items-center gap-2 group">
-              <img src="blob:https://gemini.google.com/04bf7b52-1453-4292-aec9-e513032e053e" alt="" width="50" />
+              <img src={logo} alt="" width="50" />
             </Link>
 
             {/* DESKTOP NAV: Combines Public + User Links */}
