@@ -42,7 +42,7 @@ const UnifiedHeader = () => {
           {/* LOGO */}
           <div className="flex items-center gap-10">
             <Link to="/" className="flex items-center gap-2 group">
-              <img src="https://plain-apac-prod-public.komododecks.com/202608/18/dNTkk70QnDVJXr3S618D/image.jpg" alt="" width="80" />
+              <img src="blob:https://gemini.google.com/04bf7b52-1453-4292-aec9-e513032e053e" alt="" width="50" />
             </Link>
 
             {/* DESKTOP NAV: Combines Public + User Links */}
