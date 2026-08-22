@@ -53,8 +53,8 @@ const Home = () => {
 
   const fetchFeaturedTours = async () => {
     try {
-      const response = await axios.get("/tours/featured/list");
-      setFeaturedTours(response.data);
+      const response = await axios.get("/tours");
+      setFeaturedTours(response.data.tours);
     } catch (error) {
       console.error("Error fetching tours:", error);
     } finally {
