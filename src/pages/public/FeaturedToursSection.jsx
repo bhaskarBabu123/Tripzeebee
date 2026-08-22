@@ -106,7 +106,7 @@ const FeaturedToursSection = ({ isLoading = false, featuredTours = [] }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {isLoading || featuredTours.length === 0 
             ? skeletonData.map((_, index) => <SkeletonCard key={`skeleton-${index}`} />)
-            : featuredTours.slice(0, 3).map((tour) => (
+            : featuredTours.map((tour) => (
                 <div key={tour._id} className="group bg-white rounded-[2rem] border border-slate-200/60 overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] transition-all duration-500">
                   
                   {/* Image Container */}
